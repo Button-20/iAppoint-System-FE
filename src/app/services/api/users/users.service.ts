@@ -38,6 +38,7 @@ export class UsersService {
         this.globals.storage.setAccessToken(resp.token);
         this.globals.storage.setUserDetails(resp.data);
         this.globals.user = resp.data;
+        this.globals.router.navigate(['/main/home']);
         this.globals.toast.success(resp.message);
         this.globals.spinner.hide();
         resolve(resp);

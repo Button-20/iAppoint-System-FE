@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "iAppoint",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

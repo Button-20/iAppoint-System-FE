@@ -15,6 +15,5 @@ export class SigninComponent {
 
   async onSubmit(formData: any) {
     await this.usersService.login(formData);
-    this.globals.router.navigate(['/main/home']);
   }
 }

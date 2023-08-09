@@ -1,8 +1,13 @@
-<div class="text-center mb-4"><h4 class="fw-bolder"><span class="text-primary">Welcome</span> Back</h4></div>
+<div class="text-center mb-4">
+  <h4 class="fw-bolder"><span class="text-primary">Welcome</span> Back</h4>
+</div>
 <signin-form (onSubmitEvent)="onSubmit($event)"></signin-form>
 <p class="my-3 mb-5 mx-4">
-  Don't have an account?
-  <a class="text-primary text-decoration-none pointer" routerLink="/auth/register"
-    >Sign Up</a
+  Forgot your password?
+  <a
+    class="text-primary text-decoration-none pointer"
+    routerLink="/auth/forgot-password"
   >
+    Reset Password
+  </a>
 </p>

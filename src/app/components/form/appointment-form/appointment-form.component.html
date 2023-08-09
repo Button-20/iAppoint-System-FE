@@ -1,0 +1,165 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ appointment ? "Edit" : "Add" }}
+    Appointment
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="
+      appointmentForm.reset();
+      selectedCustomer = undefined;
+      appointment = null;
+      dismissModal.emit()
+    "
+    #closeBtn
+  ></button>
+</div>
+<div class="modal-body">
+  <form class="mx-4" [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+    <div class="form-input my-3 mb-4 dropdown" (click)="selectDropdown($event)">
+      <input
+        type="text"
+        id="customer"
+        aria-describedby="customerHelp"
+        autocomplete="off"
+        [value]="
+          selectedCustomer
+            ? selectedCustomer.firstname + ' ' + selectedCustomer.lastname
+            : ''
+        "
+        placeholder="Customer"
+        required
+        readonly
+        [ngClass]="{
+          'is-invalid':
+            customer.invalid && (customer.dirty || customer.touched),
+          'is-valid': customer.valid && (customer.dirty || customer.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Customer <span class="text-danger">*</span></label
+      >
+      <div class="dropdown-options">
+        <div
+          class="dropdown-option"
+          *ngFor="let customer of customers"
+          (click)="
+            appointmentForm.controls['customer'].setValue(customer._id);
+            selectedCustomer = customer
+          "
+        >
+          {{ customer.firstname }} {{ customer.lastname }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="customer.invalid && (customer.dirty || customer.touched)"
+    >
+      <small
+        *ngIf="
+        customer.invalid && (customer.dirty || customer.touched) && customer.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Customer is required
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="datetime-local"
+        id="appointment_date"
+        aria-describedby="appointment_dateHelp"
+        autocomplete="off"
+        formControlName="appointment_date"
+        placeholder="Appointment Date"
+        required
+        [ngClass]="{
+          'is-invalid':
+            appointment_date.invalid &&
+            (appointment_date.dirty || appointment_date.touched),
+          'is-valid':
+            appointment_date.valid &&
+            (appointment_date.dirty || appointment_date.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Appointment Date
+        <span class="text-danger">*</span>
+      </label>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="
+        appointment_date.invalid &&
+        (appointment_date.dirty || appointment_date.touched)
+      "
+    >
+      <small
+        *ngIf="
+        appointment_date.invalid && (appointment_date.dirty || appointment_date.touched) && appointment_date.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Appointment Date is required
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <textarea
+        id="description"
+        aria-describedby="descriptionHelp"
+        autocomplete="off"
+        formControlName="description"
+        rows="5"
+        placeholder="Description"
+        class="form-control"
+        required
+        [ngClass]="{
+          'is-invalid':
+            description.invalid && (description.dirty || description.touched),
+          'is-valid':
+            description.valid && (description.dirty || description.touched)
+        }"
+      ></textarea>
+      <label for="Description" class="form-label"
+        >Description <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="description.invalid && (description.dirty || description.touched)"
+    >
+      <small
+        *ngIf="
+        description.invalid && (description.dirty || description.touched) && description.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Description is required
+      </small>
+    </div>
+
+    <div class="modal-footer mt-3 border-0 p-0">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        (click)="appointmentForm.reset(); dismissModal.emit()"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary me-0"
+        [disabled]="!appointmentForm.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

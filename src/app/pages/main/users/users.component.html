@@ -1,0 +1,116 @@
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5">
+    <div class="col-4">
+      <div class="searchbar">
+        <input
+          type="text"
+          name="search"
+          (keyup)="search($event)"
+          placeholder="Search by Full Name or Email"
+        />
+        <i class="bi bi-search"></i>
+      </div>
+    </div>
+    <div class="col text-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + modalId }}"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Add User
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive mx-3">
+    <table class="table table-borderless align-middle">
+      <thead id="table-header">
+        <tr>
+          <th class="fw-500 bg-none">ID</th>
+          <th class="fw-500 bg-none">Full Name</th>
+          <th class="fw-500 bg-none">Email</th>
+          <th class="fw-500 bg-none">Role</th>
+          <th class="fw-500 bg-none">Joined</th>
+          <th class="fw-500 bg-none">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let user of usersService.users">
+          <td scope="row">
+            {{ "#" + user._id.slice(-8) }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <img
+                loading="lazy"
+                [src]="user.picture"
+                alt="User Avatar"
+                class="img-fluid avatar rounded-circle"
+              />
+              <p class="mb-0 fw-500">
+                {{ user.fullname }}
+              </p>
+            </div>
+          </td>
+          <td>
+            <p class="mb-0 fw-500">
+              {{ user.email }}
+            </p>
+          </td>
+          <td>
+            <span
+              class="badge rounded-pill text-bg-info fs-14 text-white px-3 py-2"
+              [ngClass]="
+                user.role === 'super_admin'
+                  ? 'bg-info'
+                  : user.role === 'user'
+                  ? 'bg-success'
+                  : 'bg-warning'
+              "
+            >
+              {{ user.role.replace("_", " ") | titlecase }}
+            </span>
+          </td>
+          <td>
+            {{ user.createdAt | date : "mediumDate" }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <button class="actionBtn text-primary">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button
+                class="actionBtn text-danger"
+                (click)="onDelete(user._id)"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mx-3 mt-2">
+    <pagination
+      [totalItems]="usersService.users.length"
+      [itemsPerPage]="usersService.usersPagination.itemsPerPage"
+    ></pagination>
+  </div>
+</div>
+
+<modal
+  [modalId]="modalId"
+  [centered]="true"
+  size="xl"
+  [keyboard]="false"
+  [backdrop]="'static'"
+>
+  <user-form
+    (emitSubmit)="onSubmit($event)"
+    [user]="usersService.user"
+    [organisations]="organisationsService.organisations"
+    (dismissModal)="resetData()"
+  ></user-form>
+</modal>

@@ -1,0 +1,234 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ staff ? "Edit" : "Add" }}
+    Staff
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="staffForm.reset(); staff = null; dismissModal.emit()"
+    #closeBtn
+  ></button>
+</div>
+<div class="modal-body">
+  <form class="mx-4" [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+    <div class="row g-0 gx-3 my-3">
+      <div class="col-6">
+        <div class="form-input mb-2">
+          <input
+            type="text"
+            id="fullname"
+            aria-describedby="fullnameHelp"
+            autocomplete="off"
+            formControlName="fullname"
+            placeholder="Full Name"
+            required
+            [ngClass]="{
+              'is-invalid':
+                fullname.invalid && (fullname.dirty || fullname.touched),
+              'is-valid': fullname.valid && (fullname.dirty || fullname.touched)
+            }"
+          />
+          <label for="fullname" class="form-label"
+            >Full Name <span class="text-danger">*</span></label
+          >
+        </div>
+        <div
+          class="validation-messages"
+          *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)"
+        >
+          <small
+            *ngIf="
+        fullname.invalid && (fullname.dirty || fullname.touched) && fullname.errors?.['required']
+      "
+            class="text-danger"
+          >
+            Full Name is required
+          </small>
+          <small
+            *ngIf="
+        fullname.invalid && (fullname.dirty || fullname.touched) && fullname.errors?.['minlength']
+      "
+            class="text-danger"
+          >
+            Full Name must be at least 3 characters long
+          </small>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-input mb-2">
+          <input
+            type="password"
+            id="password"
+            aria-describedby="passwordHelp"
+            autocomplete="off"
+            formControlName="password"
+            placeholder="Password"
+            required
+            [ngClass]="{
+              'is-invalid':
+                password.invalid && (password.dirty || password.touched),
+              'is-valid': password.valid && (password.dirty || password.touched)
+            }"
+          />
+          <label for="password" class="form-label">
+            Password <span class="text-danger">*</span></label
+          >
+        </div>
+        <div
+          class="validation-messages"
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+        >
+          <small
+            *ngIf="
+        password.invalid && (password.dirty || password.touched) && password.errors?.['required']
+      "
+            class="text-danger"
+          >
+            Password is required
+          </small>
+          <small
+            *ngIf="
+        password.invalid && (password.dirty || password.touched) && password.errors?.['password']
+      "
+            class="text-danger"
+          >
+            Minimum eight characters, at least one uppercase letter, one
+            lowercase letter, one number and one special character
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="email"
+        id="email"
+        aria-describedby="emailHelp"
+        autocomplete="off"
+        formControlName="email"
+        placeholder="Email address"
+        required
+        [ngClass]="{
+          'is-invalid': email.invalid && (email.dirty || email.touched),
+          'is-valid': email.valid && (email.dirty || email.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Email address <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+    >
+      <small
+        *ngIf="
+        email.invalid && (email.dirty || email.touched) && email.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Email is required
+      </small>
+      <small
+        *ngIf="
+        email.invalid && (email.dirty || email.touched) && email.errors?.['pattern']
+      "
+        class="text-danger"
+      >
+        Email must be a valid email address
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="tel"
+        id="phone"
+        aria-describedby="phoneHelp"
+        autocomplete="off"
+        formControlName="phone"
+        placeholder="Phone"
+        required
+        [ngClass]="{
+          'is-invalid': phone.invalid && (phone.dirty || phone.touched),
+          'is-valid': phone.valid && (phone.dirty || phone.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Phone Number <span class="text-danger">*</span>
+      </label>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+    >
+      <small
+        *ngIf="
+        phone.invalid && (phone.dirty || phone.touched) && phone.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Phone is required
+      </small>
+      <small
+        *ngIf="
+        phone.invalid && (phone.dirty || phone.touched) && phone.errors?.['minlength']
+      "
+        class="text-danger"
+      >
+        Phone must be at least 10 characters long
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="tel"
+        id="phone"
+        aria-describedby="phoneHelp"
+        autocomplete="off"
+        formControlName="phone"
+        placeholder="Phone"
+        required
+        [ngClass]="{
+          'is-invalid':
+            phone_alt.invalid && (phone_alt.dirty || phone_alt.touched),
+          'is-valid': phone_alt.valid && (phone_alt.dirty || phone_alt.touched)
+        }"
+      />
+      <label for="email" class="form-label">Phone Number (Alt.)</label>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="phone_alt.invalid && (phone_alt.dirty || phone_alt.touched)"
+    >
+      <small
+        *ngIf="
+        phone_alt.invalid && (phone_alt.dirty || phone_alt.touched) && phone_alt.errors?.['minlength']
+      "
+        class="text-danger"
+      >
+        Phone Alt. must be at least 10 characters long
+      </small>
+    </div>
+
+    <div class="modal-footer mt-3 border-0 p-0">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        (click)="staffForm.reset(); dismissModal.emit()"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary me-0"
+        [disabled]="!staffForm.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

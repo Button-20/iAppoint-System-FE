@@ -1,0 +1,45 @@
+<div class="row justify-content-between g-0 sm-px-2 px-4 navbar">
+  <div class="col-3 d-flex align-items-center">
+    <p class="fw-bolder h4 mb-0">{{ title.split("-")[0].trim() }}</p>
+  </div>
+  <div class="col d-flex justify-content-end align-items-center gap-3">
+    <button class="notification active">
+      <i class="bi bi-bell-fill fs-20 text-muted"></i>
+    </button>
+    <button
+      class="profile-dropdown d-flex align-items-center gap-3"
+      (click)="selectDropdown($event)"
+    >
+      <img loading="lazy" [src]="globals.user?.picture" alt="Profile Pic" />
+      <h6 class="mb-0 fw-bolder">
+        {{ globals.user?.fullname }}
+      </h6>
+      <i class="bi bi-caret-down-fill fs-20 text-muted"></i>
+      <div class="dropdown-options">
+        <a
+          routerLink="/main/profile"
+          class="dropdown-option text-decoration-none text-muted border-0 font-14 color-text"
+        >
+          <img
+            loading="lazy"
+            class="menu-user-icon me-3"
+            src="assets/icons/profile-icon.svg"
+            alt=""
+          />
+          View profile
+        </a>
+        <a
+          class="dropdown-option text-decoration-none text-muted font-14 color-text"
+          (click)="logOut()"
+          ><img
+            loading="lazy"
+            class="me-3 menu-user-icon"
+            src="assets/icons/logout-icon.svg"
+            alt=""
+          />
+          Log out</a
+        >
+      </div>
+    </button>
+  </div>
+</div>

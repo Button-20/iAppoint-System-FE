@@ -1,0 +1,112 @@
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5">
+    <div class="col-4">
+      <div class="searchbar">
+        <input
+          type="text"
+          name="search"
+          (keyup)="search($event)"
+          placeholder="Search by Customer's First Name or Last Name"
+        />
+        <i class="bi bi-search"></i>
+      </div>
+    </div>
+    <div class="col text-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + modalId }}"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Add Customer
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive mx-3">
+    <table class="table table-borderless align-middle">
+      <thead id="table-header">
+        <tr>
+          <th class="fw-500 bg-none">ID</th>
+          <th class="fw-500 bg-none">Full Name</th>
+          <th class="fw-500 bg-none">Phone</th>
+          <th class="fw-500 bg-none">D.O.B</th>
+          <th class="fw-500 bg-none">Joined</th>
+          <th class="fw-500 bg-none">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let customer of customersService.customers">
+          <td scope="row">
+            {{ "#" + customer._id.slice(-8) }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <img
+                loading="lazy"
+                [src]="customer.picture"
+                alt="Customer Avatar"
+                class="img-fluid avatar rounded-circle"
+              />
+              <p class="mb-0 fw-500">
+                {{ customer.firstname + " " + customer.lastname }}
+              </p>
+            </div>
+          </td>
+          <td>
+            <p class="mb-0 fw-500">
+              {{ customer.phone }}
+              {{ customer.phone_alt ? " / " + customer.phone_alt : "" }}
+            </p>
+          </td>
+          <td>
+            <p class="mb-0 fw-500">
+              {{ customer.dob | date : "mediumDate" }}
+            </p>
+          </td>
+          <td>
+            {{ customer.createdAt | date : "mediumDate" }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <button
+                class="actionBtn text-primary"
+                data-bs-toggle="modal"
+                attr.data-bs-target="{{ '#' + modalId }}"
+                (click)="customersService.customer = customer"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button
+                class="actionBtn text-danger"
+                (click)="onDelete(customer._id)"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mx-3 mt-2">
+    <pagination
+      [totalItems]="customersService.customers.length"
+      [itemsPerPage]="customersService.customersPagination.itemsPerPage"
+    ></pagination>
+  </div>
+</div>
+
+<modal
+  [modalId]="modalId"
+  [centered]="true"
+  size="xl"
+  [keyboard]="false"
+  [backdrop]="'static'"
+>
+  <customer-form
+    (emitSubmit)="onSubmit($event)"
+    [customer]="customersService.customer"
+    (dismissModal)="resetData()"
+  ></customer-form>
+</modal>

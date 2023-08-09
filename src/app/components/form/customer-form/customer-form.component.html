@@ -1,0 +1,265 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ customer ? "Edit" : "Add" }}
+    Customer
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="customerForm.reset(); customer = null; dismissModal.emit()"
+    #closeBtn
+  ></button>
+</div>
+<div class="modal-body">
+  <form class="mx-4" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <div class="row g-0 gx-3 my-3">
+      <div class="col-6">
+        <div class="form-input mb-2">
+          <input
+            type="text"
+            id="firstname"
+            aria-describedby="firstnameHelp"
+            autocomplete="off"
+            formControlName="firstname"
+            placeholder="First Name"
+            required
+            [ngClass]="{
+              'is-invalid':
+                firstname.invalid && (firstname.dirty || firstname.touched),
+              'is-valid':
+                firstname.valid && (firstname.dirty || firstname.touched)
+            }"
+          />
+          <label for="firstname" class="form-label"
+            >First Name <span class="text-danger">*</span></label
+          >
+        </div>
+        <div
+          class="validation-messages"
+          *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)"
+        >
+          <small
+            *ngIf="
+        firstname.invalid && (firstname.dirty || firstname.touched) && firstname.errors?.['required']
+      "
+            class="text-danger"
+          >
+            First Name is required
+          </small>
+          <small
+            *ngIf="
+        firstname.invalid && (firstname.dirty || firstname.touched) && firstname.errors?.['minlength']
+      "
+            class="text-danger"
+          >
+            First Name must be at least 3 characters long
+          </small>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-input mb-2">
+          <input
+            type="text"
+            id="lastname"
+            aria-describedby="lastnameHelp"
+            autocomplete="off"
+            formControlName="lastname"
+            placeholder="Last Name"
+            required
+            [ngClass]="{
+              'is-invalid':
+                lastname.invalid && (lastname.dirty || lastname.touched),
+              'is-valid': lastname.valid && (lastname.dirty || lastname.touched)
+            }"
+          />
+          <label for="lastname" class="form-label">
+            Last Name <span class="text-danger">*</span></label
+          >
+        </div>
+        <div
+          class="validation-messages"
+          *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)"
+        >
+          <small
+            *ngIf="
+        lastname.invalid && (lastname.dirty || lastname.touched) && lastname.errors?.['required']
+      "
+            class="text-danger"
+          >
+            Last Name is required
+          </small>
+          <small
+            *ngIf="
+        lastname.invalid && (lastname.dirty || lastname.touched) && lastname.errors?.['minlength']
+      "
+            class="text-danger"
+          >
+            Last Name must be at least 3 characters long
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="email"
+        id="email"
+        aria-describedby="emailHelp"
+        autocomplete="off"
+        formControlName="email"
+        placeholder="Email address"
+        required
+        [ngClass]="{
+          'is-invalid': email.invalid && (email.dirty || email.touched),
+          'is-valid': email.valid && (email.dirty || email.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Email address <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+    >
+      <small
+        *ngIf="
+        email.invalid && (email.dirty || email.touched) && email.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Email is required
+      </small>
+      <small
+        *ngIf="
+        email.invalid && (email.dirty || email.touched) && email.errors?.['pattern']
+      "
+        class="text-danger"
+      >
+        Email must be a valid email address
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="tel"
+        id="phone"
+        aria-describedby="phoneHelp"
+        autocomplete="off"
+        formControlName="phone"
+        placeholder="Phone"
+        required
+        [ngClass]="{
+          'is-invalid': phone.invalid && (phone.dirty || phone.touched),
+          'is-valid': phone.valid && (phone.dirty || phone.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Phone Number <span class="text-danger">*</span>
+      </label>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+    >
+      <small
+        *ngIf="
+        phone.invalid && (phone.dirty || phone.touched) && phone.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Phone is required
+      </small>
+      <small
+        *ngIf="
+        phone.invalid && (phone.dirty || phone.touched) && phone.errors?.['minlength']
+      "
+        class="text-danger"
+      >
+        Phone must be at least 10 characters long
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="tel"
+        id="phone"
+        aria-describedby="phoneHelp"
+        autocomplete="off"
+        formControlName="phone"
+        placeholder="Phone"
+        required
+        [ngClass]="{
+          'is-invalid': phone_alt.invalid && (phone_alt.dirty || phone_alt.touched),
+          'is-valid': phone_alt.valid && (phone_alt.dirty || phone_alt.touched)
+        }"
+      />
+      <label for="email" class="form-label">Phone Number (Alt.)</label>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="phone_alt.invalid && (phone_alt.dirty || phone_alt.touched)"
+    >
+      <small
+        *ngIf="
+        phone_alt.invalid && (phone_alt.dirty || phone_alt.touched) && phone_alt.errors?.['minlength']
+      "
+        class="text-danger"
+      >
+        Phone Alt. must be at least 10 characters long
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="date"
+        id="dob"
+        aria-describedby="dobHelp"
+        autocomplete="off"
+        formControlName="dob"
+        placeholder="Date of Birth"
+        required
+        [ngClass]="{
+          'is-invalid': dob.invalid && (dob.dirty || dob.touched),
+          'is-valid': dob.valid && (dob.dirty || dob.touched)
+        }"
+      />
+      <label for="dob" class="form-label"
+        >Date Of Birth <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="dob.invalid && (dob.dirty || dob.touched)"
+    >
+      <small
+        *ngIf="
+        dob.invalid && (dob.dirty || dob.touched) && dob.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Date Of Birth is required
+      </small>
+    </div>
+
+    <div class="modal-footer mt-3 border-0 p-0">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        (click)="customerForm.reset(); dismissModal.emit()"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary me-0"
+        [disabled]="!customerForm.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

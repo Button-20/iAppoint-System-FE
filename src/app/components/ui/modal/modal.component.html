@@ -1,0 +1,27 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  [ngClass]="{ right }"
+  [id]="modalId.replace('#', '')"
+  role="dialog"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  [attr.data-bs-backdrop]="backdrop"
+  [attr.data-bs-keyboard]="keyboard"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-md"
+    [ngClass]="{
+      'modal-lg': size === 'lg',
+      'modal-sm': size === 'sm',
+      'modal-xl': size === 'xl',
+      'modal-dialog-centered': centered,
+      'modal-dialog-scrollable': scrollable
+    }"
+  >
+    <div class="modal-content border-0">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="mt-2">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="text-muted d-flex align-items-center">
+      <p class="mb-0 me-3">Show result:</p>
+      <button class="page-dropdown" (click)="selectDropdown($event)">
+        {{ itemsPerPage }}
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          class="ms-2"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 6L8 10L12 6"
+            stroke="#718096"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <div class="dropdown-options">
+          <a
+            href="#"
+            class="dropdown-option text-decoration-none text-muted"
+            *ngFor="let result of resultPerPage"
+            (click)="changeResultPerPage(result)"
+          >
+            {{ result }}
+          </a>
+        </div>
+      </button>
+    </div>
+    <nav>
+      <ul class="pagination">
+        <li
+          class="paginationArrows"
+          [class.disabled]="currentPage === 1"
+          (click)="onPageChange(currentPage - 1)"
+        >
+          <a
+            href="javascript:void(0);"
+            aria-label="Previous"
+            class="d-flex justify-content-center align-items-center"
+          >
+            <span aria-hidden="true"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5 5.00098L7.5 10.001L12.5 15.001"
+                  stroke="#718096"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </li>
+        <li
+          class="pageNo fw-700"
+          [class.active]="currentPage === page"
+          *ngFor="let page of getPagesArray()"
+          (click)="onPageChange(page)"
+        >
+          <a href="javascript:void(0);">
+            <ng-container *ngIf="pageType(page) === 'number'">{{
+              page
+            }}</ng-container>
+            <ng-container *ngIf="pageType(page) === 'string'">{{
+              page
+            }}</ng-container>
+          </a>
+        </li>
+        <li
+          class="paginationArrows"
+          (click)="onPageChange(currentPage + 1)"
+          [class.disabled]="currentPage === totalPages"
+        >
+          <a href="javascript:void(0);" aria-label="Next">
+            <span aria-hidden="true"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.5 5.00098L12.5 10.001L7.5 15.001"
+                  stroke="#718096"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

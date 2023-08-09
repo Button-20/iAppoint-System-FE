@@ -1,0 +1,31 @@
+<div class="d-flex flex-column p-2 px-4 pe-0 sidebar">
+  <div class="col-12 d-flex align-items-center gap-2 py-2 pt-3">
+    <img
+      loading="lazy"
+      src="assets/images/logo.png"
+      alt="Bookshelf Logo"
+      class="img-fluid logo"
+      routerLink="/main/home"
+    />
+    <p class="mb-0 fs-24 fw-600 text-primary">iAppoint</p>
+  </div>
+  <div class="col-12 d-flex flex-column justify-content-between h-100">
+    <nav class="navigation container-fluid g-0 py-3">
+      <li class="nav-item my-1" *ngFor="let item of navigations">
+        <a
+          class="nav-link py-3"
+          [routerLink]="item.link"
+          [routerLinkActive]="['active']"
+          data-bs-tooltip="tooltip"
+          data-bs-placement="right"
+          title="{{ item.name }}"
+        >
+          <i class="bi {{ item.icon }} me-3"></i>
+          <p class="mb-0 fw-500">
+            {{ item.name }}
+          </p>
+        </a>
+      </li>
+    </nav>
+  </div>
+</div>

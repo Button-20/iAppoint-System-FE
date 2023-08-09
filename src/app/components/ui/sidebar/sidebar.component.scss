@@ -1,0 +1,43 @@
+.nav-item {
+  list-style: none;
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    color: #797b89;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding-inline: 1rem;
+
+    &.active,
+    &:hover {
+      opacity: 1;
+      color: var(--primary-color);
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.logo {
+  cursor: pointer;
+  outline: none;
+  width: 60px !important;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12rem;
+  height: calc(100vh - 7rem);
+}

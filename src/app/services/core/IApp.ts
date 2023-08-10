@@ -45,3 +45,16 @@ export interface ICustomer {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IPayment {
+  _id: string;
+  user: IUser;
+  amount: number;
+  paymentDate: string;
+  mobile_network: string;
+  mobile_number: string;
+  trans_ref_no: string;
+  transaction_no: string;
+  status: string;
+  checkCount: number;
+}

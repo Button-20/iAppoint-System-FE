@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     pathMatch: 'full',
     path: '',
-    redirectTo: 'auth/login',
+    redirectTo: 'main/home',
   },
   {
     path: 'auth',
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'auth/login',
+    redirectTo: 'main/home',
   }
 ];
 

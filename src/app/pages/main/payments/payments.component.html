@@ -1,1 +1,105 @@
-<p>payments works!</p>
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5">
+    <div class="col text-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + modalId }}"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Make Payment
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive mx-3">
+    <table class="table table-borderless align-middle">
+      <thead id="table-header">
+        <tr>
+          <th class="fw-500 bg-none">ID</th>
+          <th class="fw-500 bg-none">Full Name</th>
+          <th class="fw-500 bg-none">Email</th>
+          <th class="fw-500 bg-none">Role</th>
+          <th class="fw-500 bg-none">Joined</th>
+          <th class="fw-500 bg-none">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let user of paymentsService.payments">
+          <td scope="row">
+            {{ "#" + user._id.slice(-8) }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <img
+                loading="lazy"
+                [src]="user.picture"
+                alt="User Avatar"
+                class="img-fluid avatar rounded-circle"
+              />
+              <p class="mb-0 fw-500">
+                {{ user.fullname }}
+              </p>
+            </div>
+          </td>
+          <td>
+            <p class="mb-0 fw-500">
+              {{ user.email }}
+            </p>
+          </td>
+          <td>
+            <span
+              class="badge rounded-pill text-bg-info fs-14 text-white px-3 py-2"
+              [ngClass]="
+                user.role === 'super_admin'
+                  ? 'bg-info'
+                  : user.role === 'user'
+                  ? 'bg-success'
+                  : 'bg-warning'
+              "
+            >
+              {{ user.role.replace("_", " ") | titlecase }}
+            </span>
+          </td>
+          <td>
+            {{ user.createdAt | date : "mediumDate" }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <button class="actionBtn text-primary">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="paymentsService.payments.length === 0">
+          <td colspan="6" class="text-center">
+            <img
+              width="150"
+              height="150"
+              src="https://img.icons8.com/external-flat-andi-nur-abdillah/64/external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah.png"
+              alt="external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah"
+            />
+            <p class="mb-0 fw-500 fs-24 text-muted">No Payments Found</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mx-3 mt-2">
+    <pagination
+      [totalItems]="paymentsService.payments.length"
+      [itemsPerPage]="paymentsService.paymentsPagination.itemsPerPage"
+    ></pagination>
+  </div>
+</div>
+
+<modal
+  [modalId]="modalId"
+  [centered]="true"
+  size="xl"
+  [keyboard]="false"
+  [backdrop]="'static'"
+>
+  <payment-form (emitSubmit)="onSubmit($event)"></payment-form>
+</modal>

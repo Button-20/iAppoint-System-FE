@@ -23,6 +23,9 @@ export class BulksmsFormComponent {
   onSubmit() {
     if (this.bulkSmsForm.invalid) return;
     this.emitSubmit.emit(this.bulkSmsForm.value);
+    this.bulkSmsForm.reset({
+      message: '',
+    });
   }
 
   get message() {

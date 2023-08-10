@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppointmentFormComponent } from './form/appointment-form/appointment-form.component';
 import { BulksmsFormComponent } from './form/bulksms-form/bulksms-form.component';
 import { CustomerFormComponent } from './form/customer-form/customer-form.component';
+import { PaymentFormComponent } from './form/payment-form/payment-form.component';
 import { SigninFormComponent } from './form/signin-form/signin-form.component';
 import { StaffFormComponent } from './form/staff-form/staff-form.component';
 import { UserFormComponent } from './form/user-form/user-form.component';
@@ -24,6 +25,7 @@ const components: Array<any> = [
   UserFormComponent,
   StaffFormComponent,
   BulksmsFormComponent,
+  PaymentFormComponent,
 ];
 
 @NgModule({

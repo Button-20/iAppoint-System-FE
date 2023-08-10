@@ -23,6 +23,18 @@ export class AppointmentsComponent {
     await this.customersService.getCustomersByOrganisation();
   }
 
+  ngOnDestroy() {
+    this.appointmentsService.appointments = [];
+    this.appointmentsService.appointmentsPagination = {
+      page: 1,
+      itemsPerPage: 10,
+      totalItemsCount: 0,
+      search: '',
+      sortBy: 'createdAt',
+      order: 'DESC',
+    };
+  }
+
   ngAfterViewInit() {
     this.startListener();
   }

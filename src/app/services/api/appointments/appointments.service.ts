@@ -19,11 +19,30 @@ export class AppointmentsService {
   };
   dashboard = {
     totalAppointments: 0,
-  }
+  };
 
   constructor(private api: RequestService, private globals: GlobalsService) {}
 
   async getAppointments() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        this.globals.spinner.show();
+        const resp: any = await this.api.get(
+          `appointments?page=${this.appointmentsPagination.page}&itemsPerPage=${this.appointmentsPagination.itemsPerPage}&search=${this.appointmentsPagination.search}&sortBy=${this.appointmentsPagination.sortBy}&order=${this.appointmentsPagination.order}`
+        );
+        this.appointments = resp.data as IAppointment[];
+        this.appointmentsPagination.totalItemsCount = resp.totalItemsCount;
+        this.globals.spinner.hide();
+        resolve(resp);
+      } catch (error: any) {
+        this.globals.spinner.hide();
+        this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async getAppointmentsByOrganisation() {
     return await new Promise(async (resolve, reject) => {
       try {
         this.globals.spinner.show();

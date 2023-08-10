@@ -19,8 +19,16 @@ export class AppointmentsComponent {
   ) {}
 
   async ngOnInit() {
-    await this.appointmentsService.getAppointments();
-    await this.customersService.getCustomersByOrganisation();
+    switch (this.globals.user.role) {
+      case 'super_admin':
+        await this.appointmentsService.getAppointments();
+        break;
+      case 'user':
+        await this.customersService.getCustomersByOrganisation();
+        break;
+      default:
+        break;
+    }
   }
 
   ngOnDestroy() {

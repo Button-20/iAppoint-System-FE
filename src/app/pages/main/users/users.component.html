@@ -89,6 +89,17 @@
             </div>
           </td>
         </tr>
+        <tr *ngIf="usersService.users.length === 0">
+          <td colspan="6" class="text-center">
+            <img
+              width="150"
+              height="150"
+              src="https://img.icons8.com/external-flat-andi-nur-abdillah/64/external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah.png"
+              alt="external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah"
+            />
+            <p class="mb-0 fw-500 fs-24 text-muted">No Users Found</p>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

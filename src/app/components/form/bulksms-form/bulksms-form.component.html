@@ -1,0 +1,22 @@
+<form [formGroup]="bulkSmsForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3 mx-3">
+    <label for="" class="form-label"></label>
+    <textarea
+      class="form-control"
+      name="message"
+      id=""
+      placeholder="Enter your message here..."
+      rows="10"
+      formControlName="message"
+    ></textarea>
+  </div>
+  <div class="text-end">
+    <button
+      type="submit"
+      class="btn btn-secondary"
+      [disabled]="bulkSmsForm.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</form>

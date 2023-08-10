@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppointmentFormComponent } from './form/appointment-form/appointment-form.component';
+import { BulksmsFormComponent } from './form/bulksms-form/bulksms-form.component';
 import { CustomerFormComponent } from './form/customer-form/customer-form.component';
 import { SigninFormComponent } from './form/signin-form/signin-form.component';
 import { StaffFormComponent } from './form/staff-form/staff-form.component';
@@ -22,6 +23,7 @@ const components: Array<any> = [
   AppointmentFormComponent,
   UserFormComponent,
   StaffFormComponent,
+  BulksmsFormComponent,
 ];
 
 @NgModule({

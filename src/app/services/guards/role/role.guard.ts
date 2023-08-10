@@ -11,7 +11,7 @@ import { GlobalsService } from 'src/app/services/core/globals';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
   constructor(private globals: GlobalsService) {}
 
   canActivate(
@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
     this.globals.router.navigate(['auth'], {
       queryParams: { redirectUrl: state.url },
     });
-    this.globals.storage.logOutUser();
+    this.globals.storage.clearAllStorage();
     return false;
   }
 }

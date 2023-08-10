@@ -1,1 +1,52 @@
-<p>home works!</p>
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5 gx-3">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Customers</h4>
+          <p class="card-text fs-24 text-primary fw-bolder">
+            <i class="bi bi-people-fill"></i>
+            {{ customersService.dashboard.totalCustomers }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Total customers registered in the system.
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Users</h4>
+          <p class="card-text fs-24 text-primary fw-bolder">
+            <i class="bi bi-people-fill"></i>
+            {{ usersService.dashboard.totalUsers }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Total users who are registered in the system
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Appointments</h4>
+          <p class="card-text fs-24 text-primary fw-bolder">
+            <i class="bi bi-people-fill"></i>
+            {{ customersService.dashboard.totalCustomers }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Total appointments made in the system.
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

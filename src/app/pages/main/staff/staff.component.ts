@@ -20,6 +20,18 @@ export class StaffComponent {
     await this.usersService.getStaff();
   }
 
+  ngOnDestroy() {
+    this.usersService.staffs = [];
+    this.usersService.staffPagination = {
+      page: 1,
+      itemsPerPage: 10,
+      totalItemsCount: 0,
+      search: '',
+      sortBy: 'createdAt',
+      order: 'DESC',
+    };
+  }
+
   ngAfterViewInit() {
     this.startListener();
   }
@@ -64,5 +76,14 @@ export class StaffComponent {
 
   resetData() {
     this.usersService.staff = null;
+  }
+
+  async search(event: any) {
+    this.usersService.staffPagination.search = event.target.value;
+    setTimeout(async () => {
+      this.globals.spinner.show();
+      await this.usersService.getStaff();
+      this.globals.spinner.hide();
+    }, 1500);
   }
 }

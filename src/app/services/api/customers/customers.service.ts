@@ -18,6 +18,10 @@ export class CustomersService {
     order: 'DESC',
   };
 
+  dashboard = {
+    totalCustomers: 0,
+  };
+
   constructor(private api: RequestService, private globals: GlobalsService) {}
 
   async getCustomersByOrganisation() {
@@ -25,6 +29,23 @@ export class CustomersService {
       try {
         const resp: any = await this.api.get(
           `customers-by-organisation?page=${this.customersPagination.page}&itemsPerPage=${this.customersPagination.itemsPerPage}&search=${this.customersPagination.search}&sortBy=${this.customersPagination.sortBy}&order=${this.customersPagination.order}`
+        );
+        this.customers = resp.data;
+        this.customersPagination.totalItemsCount = resp.totalItemsCount;
+        resolve(resp);
+      } catch (error: any) {
+        this.globals.spinner.hide();
+        this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async getCustomers() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(
+          `customers?page=${this.customersPagination.page}&itemsPerPage=${this.customersPagination.itemsPerPage}&search=${this.customersPagination.search}&sortBy=${this.customersPagination.sortBy}&order=${this.customersPagination.order}`
         );
         this.customers = resp.data;
         this.customersPagination.totalItemsCount = resp.totalItemsCount;
@@ -76,6 +97,30 @@ export class CustomersService {
       } catch (error: any) {
         this.globals.spinner.hide();
         this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async getCustomerTotalByOrganisation() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`customers-total-by-organisation`);
+        this.dashboard.totalCustomers = resp.data;
+        resolve(resp);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  }
+
+  async getCustomerTotal() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`customers-total`);
+        this.dashboard.totalCustomers = resp.data;
+        resolve(resp);
+      } catch (error: any) {
         reject(error);
       }
     });

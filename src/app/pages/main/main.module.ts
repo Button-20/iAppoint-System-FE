@@ -9,6 +9,8 @@ import { MainComponent } from './main.component';
 import { StaffComponent } from './staff/staff.component';
 import { UsersComponent } from './users/users.component';
 import { CustomersComponent } from './customers/customers.component';
+import { BulkSmsComponent } from './bulk-sms/bulk-sms.component';
+import { PaymentsComponent } from './payments/payments.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { CustomersComponent } from './customers/customers.component';
     StaffComponent,
     AppointmentsComponent,
     CustomersComponent,
+    BulkSmsComponent,
+    PaymentsComponent,
   ],
   imports: [CommonModule, MainRoutingModule, ComponentsModule],
 })

@@ -17,6 +17,9 @@ export class AppointmentsService {
     sortBy: 'createdAt',
     order: 'DESC',
   };
+  dashboard = {
+    totalAppointments: 0,
+  }
 
   constructor(private api: RequestService, private globals: GlobalsService) {}
 
@@ -82,6 +85,32 @@ export class AppointmentsService {
       } catch (error: any) {
         this.globals.spinner.hide();
         this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async getAppointmentsTotalByOrganisation() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(
+          `appointments-total-by-organisation`
+        );
+        this.dashboard.totalAppointments = resp.data;
+        resolve(resp);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  }
+
+  async getAppointmentsTotal() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`appointments-total`);
+        this.dashboard.totalAppointments = resp.data;
+        resolve(resp);
+      } catch (error: any) {
         reject(error);
       }
     });

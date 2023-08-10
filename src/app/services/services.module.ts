@@ -7,6 +7,7 @@ import { GlobalsService } from './core/globals';
 import { RequestService } from './core/request';
 import { CustomersService } from './api/customers/customers.service';
 import { OrganisationsService } from './api/organisations/organisations.service';
+import { SmsService } from './api/sms/sms.service';
 
 const components: Array<any> = [
   UsersService,
@@ -14,7 +15,8 @@ const components: Array<any> = [
   RequestService,
   AppointmentsService,
   CustomersService,
-  OrganisationsService
+  OrganisationsService,
+  SmsService
 ];
 
 @NgModule({

@@ -27,6 +27,9 @@ export class UsersService {
   user: IUser | null = null;
   staffs: IUser[] = [];
   staff: IUser | null = null;
+  dashboard = {
+    totalUsers: 0,
+  }
 
   constructor(private api: RequestService, private globals: GlobalsService) {}
 
@@ -150,6 +153,30 @@ export class UsersService {
       } catch (error: any) {
         this.globals.spinner.hide();
         this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async getUsersTotalByOrganisation() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`users-total-by-organisation`);
+        this.dashboard.totalUsers = resp.data;
+        resolve(resp);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  }
+
+  async getUsersTotal() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`users-total`);
+        this.dashboard.totalUsers = resp.data;
+        resolve(resp);
+      } catch (error: any) {
         reject(error);
       }
     });

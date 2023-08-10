@@ -33,6 +33,16 @@ export class SidebarComponent {
       icon: 'bi-people-fill',
       link: '/main/staff',
     },
+    {
+      name: 'Bulk SMS',
+      icon: 'bi-chat-left-fill',
+      link: '/main/bulk-sms',
+    },
+    {
+      name: 'Payments',
+      icon: 'bi-cash-stack',
+      link: '/main/payments',
+    },
   ];
 
   constructor(private globals: GlobalsService) {}

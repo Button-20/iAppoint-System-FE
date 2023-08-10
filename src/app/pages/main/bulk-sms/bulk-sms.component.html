@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5">
+    <div class="col-5">
+      <div class="searchbar">
+        <input
+          type="text"
+          name="customer"
+          placeholder="Type phone number"
+          (change)="setCustomer($event)"
+          value="{{ customerInput }}"
+        />
+        <i class="bi bi-search"></i>
+      </div>
+    </div>
+    <div class="col text-end">
+      <button
+        type="button"
+        class="btn btn-danger me-2"
+        (click)="sendBulkSmsToUsers()"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Add All Users
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="sendBulkSmsToAll()"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Add All Customers
+      </button>
+    </div>
+  </div>
+  <bulksms-form
+    [receipients]="customers"
+    (emitSubmit)="sendBulkSms($event)"
+  ></bulksms-form>
+</div>

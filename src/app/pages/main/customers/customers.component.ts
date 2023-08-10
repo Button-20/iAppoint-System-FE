@@ -22,6 +22,18 @@ export class CustomersComponent {
     this.globals.spinner.hide();
   }
 
+  ngOnDestroy() {
+    this.customersService.customers = [];
+    this.customersService.customersPagination = {
+      page: 1,
+      itemsPerPage: 10,
+      totalItemsCount: 0,
+      search: '',
+      sortBy: 'createdAt',
+      order: 'DESC',
+    };
+  }
+
   ngAfterViewInit() {
     this.startListener();
   }

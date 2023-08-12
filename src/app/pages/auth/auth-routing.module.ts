@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { SigninComponent } from './signin/signin.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -17,10 +19,14 @@ const routes: Routes = [
         path: 'login',
         component: SigninComponent,
       },
-      // {
-      //   path: 'register',
-      //   component: SignupComponent,
-      // },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+      },
+      {
+        path: 'reset-password/:token',
+        component: ResetPasswordComponent,
+      },
     ],
   },
   {

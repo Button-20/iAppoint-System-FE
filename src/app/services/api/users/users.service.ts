@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, IUser } from '../../core/IApp';
+import { Auth, IResetPassword, IUser } from '../../core/IApp';
 import { GlobalsService } from '../../core/globals';
 import { RequestService } from '../../core/request';
 
@@ -29,7 +29,7 @@ export class UsersService {
   staff: IUser | null = null;
   dashboard = {
     totalUsers: 0,
-  }
+  };
 
   constructor(private api: RequestService, private globals: GlobalsService) {}
 
@@ -147,6 +147,42 @@ export class UsersService {
       try {
         this.globals.spinner.show();
         const resp: any = await this.api.delete(`users/${userId}`);
+        this.globals.toast.success(resp.message);
+        this.globals.spinner.hide();
+        resolve(resp);
+      } catch (error: any) {
+        this.globals.spinner.hide();
+        this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async forgotPassword(email: string) {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        this.globals.spinner.show();
+        const resp: any = await this.api.post('forgot-password', { email });
+        this.globals.toast.success(resp.message);
+        this.globals.spinner.hide();
+        resolve(resp);
+      } catch (error: any) {
+        this.globals.spinner.hide();
+        this.globals.toast.error(error);
+        reject(error);
+      }
+    });
+  }
+
+  async resetPassword({ email, password, token }: IResetPassword) {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        this.globals.spinner.show();
+        const resp: any = await this.api.post('reset-password', {
+          email,
+          password,
+          token,
+        });
         this.globals.toast.success(resp.message);
         this.globals.spinner.hide();
         resolve(resp);

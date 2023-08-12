@@ -41,3 +41,13 @@
   width: 12rem;
   height: calc(100vh - 7rem);
 }
+
+@media screen and (max-width: 768px) {
+  .fs-24 {
+    font-size: 1.3rem;
+  }
+
+  .logo {
+    width: 40px !important;
+  }
+}

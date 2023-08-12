@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { GlobalsService } from 'src/app/services/core/globals';
 
 @Component({
@@ -7,6 +7,8 @@ import { GlobalsService } from 'src/app/services/core/globals';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+  @Output() emitSidebarToggle: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   navigations = [
     {
       name: 'Home',

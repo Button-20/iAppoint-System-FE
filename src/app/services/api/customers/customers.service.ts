@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ChartOptions } from 'src/app/pages/main/home/home.component';
 import { ICustomer } from '../../core/IApp';
 import { GlobalsService } from '../../core/globals';
 import { RequestService } from '../../core/request';
@@ -21,6 +22,9 @@ export class CustomersService {
   dashboard = {
     totalCustomers: 0,
   };
+
+  chartOptions: ChartOptions | any;
+  columnChartOptions: ChartOptions | any;
 
   constructor(private api: RequestService, private globals: GlobalsService) {}
 
@@ -107,6 +111,7 @@ export class CustomersService {
       try {
         const resp: any = await this.api.get(`customers-total-by-organisation`);
         this.dashboard.totalCustomers = resp.data;
+        this.columnChartOptions = resp.chartOptions;
         resolve(resp);
       } catch (error: any) {
         reject(error);
@@ -119,6 +124,31 @@ export class CustomersService {
       try {
         const resp: any = await this.api.get(`customers-total`);
         this.dashboard.totalCustomers = resp.data;
+        this.columnChartOptions = resp.chartOptions;
+        resolve(resp);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  }
+
+  async getGenderChart() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`gender-chart`);
+        this.chartOptions = resp.data;
+        resolve(resp);
+      } catch (error: any) {
+        reject(error);
+      }
+    });
+  }
+
+  async getGenderChartByOrganisation() {
+    return await new Promise(async (resolve, reject) => {
+      try {
+        const resp: any = await this.api.get(`gender-chart-by-organisation`);
+        this.chartOptions = resp.data;
         resolve(resp);
       } catch (error: any) {
         reject(error);

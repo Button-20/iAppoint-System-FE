@@ -53,8 +53,18 @@ export interface IPayment {
   paymentDate: string;
   mobile_network: string;
   mobile_number: string;
+  subscription: ISubscription;
   trans_ref_no: string;
   transaction_no: string;
   status: string;
   checkCount: number;
+}
+
+export interface ISubscription {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  duration: number;
+  durationType: string;
 }

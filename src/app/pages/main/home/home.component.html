@@ -1,6 +1,6 @@
 <div class="container mt-5">
-  <div class="row g-0 mx-3 mb-5 gx-3">
-    <div class="col-4">
+  <div class="row g-3 mx-3 mb-5">
+    <div class="col-12 col-md-4">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Customers</h4>
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Users</h4>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Appointments</h4>
@@ -45,6 +45,40 @@
               Total appointments made in the system.
             </small>
           </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Gender Distribution</h4>
+          <div id="chart">
+            <apx-chart
+              [series]="customersService.chartOptions?.series"
+              [chart]="customersService.chartOptions?.chart"
+              [plotOptions]="customersService.chartOptions?.plotOptions"
+              [labels]="customersService.chartOptions?.labels"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Customer Accumulation by Month</h4>
+          <div id="columnChart">
+            <apx-chart
+              [series]="customersService.columnChartOptions?.series"
+              [chart]="customersService.columnChartOptions?.chart"
+              [dataLabels]="customersService.columnChartOptions?.dataLabels"
+              [plotOptions]="customersService.columnChartOptions?.plotOptions"
+              [yaxis]="customersService.columnChartOptions?.yaxis"
+              [xaxis]="customersService.columnChartOptions?.xaxis"
+              [fill]="customersService.columnChartOptions?.fill"
+              [title]="customersService.columnChartOptions?.title"
+            ></apx-chart>
+          </div>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@
           data-bs-tooltip="tooltip"
           data-bs-placement="right"
           title="{{ item.name }}"
+          (click)="emitSidebarToggle.emit(false)"
         >
           <i class="bi {{ item.icon }} me-3"></i>
           <p class="mb-0 fw-500">

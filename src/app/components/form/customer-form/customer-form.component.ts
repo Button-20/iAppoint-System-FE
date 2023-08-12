@@ -46,6 +46,7 @@ export class CustomerFormComponent {
         Validators.maxLength(10),
       ])
     ),
+    gender: new FormControl('male', Validators.required),
     dob: new FormControl('', Validators.required),
     phone_alt: new FormControl('', Validators.minLength(10)),
   });

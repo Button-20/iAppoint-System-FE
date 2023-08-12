@@ -8,6 +8,25 @@
   z-index: 99;
 }
 
+.menu-btn {
+  border: none;
+  outline: none;
+  background: #fff;
+  cursor: pointer;
+  padding: 0 0.3rem;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f8f8fa;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
 .notification {
   outline: none;
   border: none;
@@ -110,5 +129,20 @@ img[alt="Notif Img"] {
     &.show {
       display: block;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dropdown-options {
+    width: 10em !important;
+  }
+
+  .h4 {
+    font-size: 1.2rem;
+  }
+
+  img[alt="Profile Pic"] {
+    width: 2rem;
+    height: 2rem;
   }
 }

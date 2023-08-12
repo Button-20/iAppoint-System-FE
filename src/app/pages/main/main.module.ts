@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component';
 import { CustomersComponent } from './customers/customers.component';
 import { BulkSmsComponent } from './bulk-sms/bulk-sms.component';
 import { PaymentsComponent } from './payments/payments.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,11 @@ import { PaymentsComponent } from './payments/payments.component';
     BulkSmsComponent,
     PaymentsComponent,
   ],
-  imports: [CommonModule, MainRoutingModule, ComponentsModule],
+  imports: [
+    CommonModule,
+    MainRoutingModule,
+    ComponentsModule,
+    NgApexchartsModule,
+  ],
 })
 export class MainModule {}

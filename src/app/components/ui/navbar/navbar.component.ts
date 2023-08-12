@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { IUser } from 'src/app/services/core/IApp';
 import { GlobalsService } from 'src/app/services/core/globals';
@@ -12,6 +12,9 @@ export class NavbarComponent {
   title: string = '';
 
   userDetails: IUser | undefined;
+
+  @Output() emitSidebarToggle: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   constructor(private titleService: Title, public globals: GlobalsService) {
     this.globals.router.events.subscribe((val) => {
@@ -50,6 +53,18 @@ export class NavbarComponent {
       element.forEach((el) => {
         if (!el.contains(e.target)) {
           el.classList.remove('show');
+        }
+      });
+    });
+  }
+
+  toggleSidebar() {
+    this.emitSidebarToggle.emit(true);
+    document.addEventListener('mousedown', (e: any) => {
+      const element = document.querySelectorAll('.sidenav');
+      element.forEach((el) => {
+        if (!el.contains(e.target)) {
+          this.emitSidebarToggle.emit(false);
         }
       });
     });

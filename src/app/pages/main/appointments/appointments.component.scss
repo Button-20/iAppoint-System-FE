@@ -71,3 +71,9 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+
+@media screen and (max-width: 768px) {
+  .fs-24{
+    font-size: 1.3rem;
+  }
+}

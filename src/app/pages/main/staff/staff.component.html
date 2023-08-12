@@ -1,6 +1,6 @@
 <div class="container mt-5">
-  <div class="row g-0 mx-3 mb-5">
-    <div class="col-4">
+  <div class="row g-0 mx-3 mb-5 gy-2">
+    <div class="col-12 col-md-4">
       <div class="searchbar">
         <input
           type="text"
@@ -46,7 +46,7 @@
                 loading="lazy"
                 [src]="user.picture"
                 alt="User Avatar"
-                class="img-fluid avatar rounded-circle"
+                class="img-fluid avatar rounded-circle d-none d-md-block"
               />
               <p class="mb-0 fw-500">
                 {{ user.fullname }}

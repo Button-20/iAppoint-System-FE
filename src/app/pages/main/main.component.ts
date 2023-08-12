@@ -9,6 +9,8 @@ import { filter, map } from 'rxjs';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {
+  isOpened: boolean = false;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

@@ -93,7 +93,9 @@ td {
   background: rgba(255, 255, 255, 0.8);
 }
 
-.table-responsive {
-  height: calc(100vh - 23em);
-  overflow-y: scroll;
+
+@media screen and (max-width: 768px) {
+  .fs-24 {
+    font-size: 1.3rem;
+  }
 }

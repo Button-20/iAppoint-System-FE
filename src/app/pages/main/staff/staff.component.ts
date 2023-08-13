@@ -74,6 +74,11 @@ export class StaffComponent {
     await this.usersService.getStaff();
   }
 
+  async itemsPerPageChanged(itemsPerPage: any) {
+    this.usersService.staffPagination.itemsPerPage = itemsPerPage;
+    await this.usersService.getStaff();
+  }
+
   resetData() {
     this.usersService.staff = null;
   }

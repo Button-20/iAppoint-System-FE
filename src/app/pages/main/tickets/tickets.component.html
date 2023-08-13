@@ -1,0 +1,188 @@
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5">
+    <div class="col text-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + modalId }}"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Add Ticket
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive mx-3">
+    <table class="table table-borderless align-middle">
+      <thead id="table-header">
+        <tr>
+          <th class="fw-500 bg-none">ID</th>
+          <th class="fw-500 bg-none">Title</th>
+          <th class="fw-500 bg-none">Customer</th>
+          <th class="fw-500 bg-none">Description</th>
+          <th class="fw-500 bg-none">Status</th>
+          <th class="fw-500 bg-none">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let ticket of ticketsService.tickets">
+          <td scope="row">
+            {{ "#" + ticket._id.slice(-8) }}
+          </td>
+          <td>
+            <p class="mb-0 fw-500">
+              {{ ticket.title }}
+            </p>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <img
+                loading="lazy"
+                [src]="ticket.customer.picture"
+                alt="Ticket Avatar"
+                class="img-fluid avatar rounded-circle d-none d-md-block"
+              />
+              <p class="mb-0 fw-500">
+                {{ ticket.customer.firstname + " " + ticket.customer.lastname }}
+              </p>
+            </div>
+          </td>
+          <td class="text-truncate" style="max-width: 200px">
+            {{ ticket.description }}
+          </td>
+          <td>
+            <span
+              class="badge rounded-pill text-bg-info fs-14 text-white px-3 py-2"
+              [ngClass]="
+                ticket.status === 'resolved' ? 'bg-success' : 'bg-danger'
+              "
+            >
+              {{ ticket.status.replace("_", " ") | titlecase }}
+            </span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <button
+                class="actionBtn text-primary"
+                (click)="ticketsService.ticket = ticket"
+                data-bs-toggle="modal"
+                attr.data-bs-target="{{ '#' + modalId }}"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button
+                class="actionBtn text-warning"
+                (click)="ticketsService.ticket = ticket"
+                data-bs-toggle="modal"
+                attr.data-bs-target="{{ '#' + modalId2 }}"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="ticketsService.tickets.length === 0">
+          <td colspan="6" class="text-center">
+            <img
+              width="150"
+              height="150"
+              src="https://img.icons8.com/external-flat-andi-nur-abdillah/64/external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah.png"
+              alt="external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah"
+            />
+            <p class="mb-0 fw-500 fs-24 text-muted">No Tickets Found</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mx-3 mt-2">
+    <pagination
+      (pageChanged)="onPageChange($event)"
+      (itemsPerPageChanged)="itemsPerPageChanged($event)"
+      [currentPage]="ticketsService.ticketsPagination.page"
+      [totalItems]="ticketsService.tickets.length"
+      [itemsPerPage]="ticketsService.ticketsPagination.itemsPerPage"
+    ></pagination>
+  </div>
+</div>
+
+<modal
+  [modalId]="modalId"
+  [centered]="true"
+  size="xl"
+  [keyboard]="false"
+  [backdrop]="'static'"
+>
+  <ticket-form
+    [ticket]="ticketsService.ticket"
+    (emitSubmit)="onSubmit($event)"
+    (dismissModal)="resetData()"
+    [customers]="customersService.customers"
+  ></ticket-form>
+</modal>
+
+<modal
+  [modalId]="modalId2"
+  [centered]="true"
+  size="xl"
+  [keyboard]="false"
+  [backdrop]="'static'"
+>
+  <div class="modal-header">
+    <h5 class="modal-title fw-500" id="exampleModalLabel">
+      {{ ticketsService.ticket?.title }}
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="resetData()"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <div class="d-flex align-items-center gap-3">
+          <img
+            loading="lazy"
+            [src]="ticketsService.ticket?.customer?.picture"
+            alt="Ticket Avatar"
+            class="img-fluid avatar rounded-circle d-none d-md-block"
+          />
+          <p class="mb-0 fw-500">
+            {{
+              ticketsService.ticket?.customer?.firstname +
+                " " +
+                ticketsService.ticket?.customer?.lastname
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex align-items-center gap-3">
+          <span
+            class="badge rounded-pill text-bg-info fs-14 text-white px-3 py-2"
+            [ngClass]="
+              ticketsService.ticket?.status === 'resolved'
+                ? 'bg-success'
+                : 'bg-danger'
+            "
+          >
+            {{ ticketsService.ticket?.status?.replace("_", " ") | titlecase }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row g-0 mt-3">
+      <div class="col-12">
+        <div class="d-flex align-items-center gap-3">
+          <p class="mb-0 fw-500">
+            {{ ticketsService.ticket?.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</modal>

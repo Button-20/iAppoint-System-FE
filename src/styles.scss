@@ -157,5 +157,11 @@ body {
   height: calc(100vh - 23em);
   overflow-y: scroll;
   overflow-x: auto !important;
-  width: calc(100vw - 4em);
+  width: calc(100% - 2em);
+}
+
+@media screen and (max-width: 768px) {
+  .table-responsive {
+    width: calc(100vw - 4em);
+  }
 }

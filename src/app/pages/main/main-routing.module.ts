@@ -8,6 +8,7 @@ import { MainComponent } from './main.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { StaffComponent } from './staff/staff.component';
 import { UsersComponent } from './users/users.component';
+import { TicketsComponent } from './tickets/tickets.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,11 @@ const routes: Routes = [
         path: 'payments',
         component: PaymentsComponent,
         data: { title: 'Payments' },
+      },
+      {
+        path: 'tickets',
+        component: TicketsComponent,
+        data: { title: 'Tickets' },
       },
     ],
   },

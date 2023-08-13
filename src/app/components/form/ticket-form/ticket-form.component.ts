@@ -6,58 +6,57 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IAppointment, ICustomer } from 'src/app/services/core/IApp';
+import { ICustomer, IOrganisation, ITicket } from 'src/app/services/core/IApp';
 
 @Component({
-  selector: 'appointment-form',
-  templateUrl: './appointment-form.component.html',
-  styleUrls: ['./appointment-form.component.scss'],
+  selector: 'ticket-form',
+  templateUrl: './ticket-form.component.html',
+  styleUrls: ['./ticket-form.component.scss'],
 })
-export class AppointmentFormComponent {
-  @Output() emitSubmit: EventEmitter<IAppointment> =
-    new EventEmitter<IAppointment>();
+export class TicketFormComponent {
+  @Output() emitSubmit: EventEmitter<ITicket> = new EventEmitter<ITicket>();
 
   @Output() dismissModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Input() appointment: IAppointment | null = null;
+  @ViewChild('closeBtn') closeBtn: any;
+
+  @Input() ticket: ITicket | null = null;
 
   @Input() customers: ICustomer[] = [];
 
-  @ViewChild('closeBtn') closeBtn: any;
+  @Input() organisations: IOrganisation[] = [];
 
-  appointmentForm: FormGroup = new FormGroup({
-    customer: new FormControl(
+  ticketForm: FormGroup = new FormGroup({
+    _id: new FormControl(''),
+    title: new FormControl(
       '',
-      Validators.compose([Validators.required, Validators.minLength(5)])
+      Validators.compose([Validators.required, Validators.minLength(3)])
     ),
     description: new FormControl(
       '',
-      Validators.compose([Validators.required, Validators.minLength(5)])
+      Validators.compose([Validators.required, Validators.minLength(3)])
     ),
-    appointment_date: new FormControl(
-      '',
-      Validators.compose([Validators.required])
-    ),
+    customer: new FormControl('', Validators.required),
   });
 
   selectedCustomer: ICustomer | undefined;
 
   ngOnChanges() {
-    if (this.appointment) {
+    if (this.ticket) {
       this.selectedCustomer = this.customers.find(
-        (customer) => customer._id === this.appointment?.customer?._id
+        (customer) => customer._id === this.ticket?.customer?._id
       );
-      this.appointmentForm.patchValue({
-        ...this.appointment,
+      this.ticketForm.patchValue({
+        ...this.ticket,
         customer: this.selectedCustomer,
-        appointment_date: this.appointment?.appointment_date?.slice(0, 16),
       });
     }
   }
 
   onSubmit() {
-    if (this.appointmentForm.valid) {
-      this.emitSubmit.emit(this.appointmentForm.value);
+    if (this.ticketForm.valid) {
+      this.emitSubmit.emit(this.ticketForm.value);
+      this.ticketForm.reset();
       this.closeBtn.nativeElement?.click();
     }
   }
@@ -96,15 +95,15 @@ export class AppointmentFormComponent {
     });
   }
 
-  get customer() {
-    return this.appointmentForm.get('customer') as FormControl;
+  get title() {
+    return this.ticketForm.get('title') as FormControl;
   }
 
   get description() {
-    return this.appointmentForm.get('description') as FormControl;
+    return this.ticketForm.get('description') as FormControl;
   }
 
-  get appointment_date() {
-    return this.appointmentForm.get('appointment_date') as FormControl;
+  get customer() {
+    return this.ticketForm.get('customer') as FormControl;
   }
 }

@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
-import { AppointmentsService } from 'src/app/services/api/appointments/appointments.service';
 import { CustomersService } from 'src/app/services/api/customers/customers.service';
-import { IAppointment } from 'src/app/services/core/IApp';
+import { TicketsService } from 'src/app/services/api/tickets/tickets.service';
+import { ITicket } from 'src/app/services/core/IApp';
 import { GlobalsService } from 'src/app/services/core/globals';
 
 @Component({
-  selector: 'app-appointments',
-  templateUrl: './appointments.component.html',
-  styleUrls: ['./appointments.component.scss'],
+  selector: 'app-ticket',
+  templateUrl: './tickets.component.html',
+  styleUrls: ['./tickets.component.scss'],
 })
-export class AppointmentsComponent {
-  modalId: string = 'appointmentFormModal';
+export class TicketsComponent {
+  modalId: string = 'ticketFormModal';
+  modalId2: string = 'ticketModal';
 
   constructor(
-    public appointmentsService: AppointmentsService,
+    public ticketsService: TicketsService,
     public customersService: CustomersService,
     public globals: GlobalsService
   ) {}
 
   async ngOnInit() {
-    await this.initAppointment();
+    await this.initializeTicket();
   }
 
   ngOnDestroy() {
-    this.appointmentsService.appointments = [];
-    this.appointmentsService.appointmentsPagination = {
+    this.ticketsService.tickets = [];
+    this.ticketsService.ticketsPagination = {
       page: 1,
       itemsPerPage: 10,
       totalItemsCount: 0,
@@ -39,12 +40,12 @@ export class AppointmentsComponent {
   }
 
   async onDelete(id: string) {
-    if (confirm('Are you sure you want to delete this appointment?')) {
-      this.globals.spinner.show();
-      await this.appointmentsService.deleteAppointment(id);
-      this.globals.spinner.hide();
-      await this.initAppointment();
-    }
+    // if (confirm('Are you sure you want to delete this ticket?')) {
+    //   this.globals.spinner.show();
+    //   await this.ticketsService.deleteTicket(id);
+    //   this.globals.spinner.hide();
+    //   await this.ticketsService.getTickets();
+    // }
   }
 
   startListener() {
@@ -65,38 +66,37 @@ export class AppointmentsComponent {
     this.customersService.customersPagination.search = event.target.value;
     setTimeout(async () => {
       this.globals.spinner.show();
-      await this.appointmentsService.getAppointments();
+      await this.initializeTicket();
       this.globals.spinner.hide();
     }, 1500);
   }
 
-  async onSubmit(appointment: IAppointment) {
+  async onSubmit(ticket: ITicket) {
     this.globals.spinner.show();
-    this.appointmentsService.appointment?._id
-      ? await this.appointmentsService.updateAppointment(appointment)
-      : await this.appointmentsService.postAppointment(appointment);
-    await this.initAppointment();
+    ticket?._id
+      ? await this.ticketsService.updateTicket(ticket)
+      : await this.ticketsService.createTicket(ticket);
+    await this.initializeTicket();
     this.globals.spinner.hide();
   }
 
   async onPageChange(page: any) {
-    this.appointmentsService.appointmentsPagination.page = page;
-    await this.initAppointment();
+    this.ticketsService.ticketsPagination.page = page;
+    await this.initializeTicket();
+  }
+  async itemsPerPageChanged(event: any) {
+    this.ticketsService.ticketsPagination.itemsPerPage = event;
+    await this.initializeTicket();
   }
 
-  async onItemsPerPageChanged(itemsPerPage: any) {
-    this.appointmentsService.appointmentsPagination.itemsPerPage = itemsPerPage;
-    await this.initAppointment();
-  }
-
-  async initAppointment() {
+  async initializeTicket() {
     switch (this.globals.user.role) {
       case 'super_admin':
-        await this.appointmentsService.getAppointments();
+        await this.ticketsService.getTickets();
         await this.customersService.getCustomers();
         break;
       case 'user':
-        await this.appointmentsService.getAppointmentsByOrganisation();
+        await this.ticketsService.getTicketsByOrganisation();
         await this.customersService.getCustomersByOrganisation();
         break;
       default:
@@ -105,6 +105,6 @@ export class AppointmentsComponent {
   }
 
   resetData() {
-    this.appointmentsService.appointment = null;
+    this.ticketsService.ticket = null;
   }
 }

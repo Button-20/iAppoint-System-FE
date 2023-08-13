@@ -12,7 +12,7 @@ export class CustomersService {
   customer: ICustomer | null = null;
   customersPagination = {
     page: 1,
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     totalItemsCount: 0,
     search: '',
     sortBy: 'createdAt',

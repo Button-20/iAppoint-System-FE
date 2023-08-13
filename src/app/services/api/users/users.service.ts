@@ -9,7 +9,7 @@ import { RequestService } from '../../core/request';
 export class UsersService {
   usersPagination = {
     page: 1,
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     totalItemsCount: 0,
     search: '',
     sortBy: 'createdAt',
@@ -17,7 +17,7 @@ export class UsersService {
   };
   staffPagination = {
     page: 1,
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     totalItemsCount: 0,
     search: '',
     sortBy: 'createdAt',

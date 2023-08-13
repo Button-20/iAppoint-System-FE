@@ -64,12 +64,14 @@ export class UserFormComponent {
       this.userForm.patchValue({
         ...this.user,
       });
+      this.userForm.controls['password'].disable();
     }
   }
 
   onSubmit() {
     if (this.userForm.valid) {
       this.emitSubmit.emit(this.userForm.value);
+      this.userForm.reset();
       this.closeBtn.nativeElement?.click();
     }
   }

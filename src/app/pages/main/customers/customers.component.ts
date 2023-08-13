@@ -18,7 +18,7 @@ export class CustomersComponent {
 
   async ngOnInit() {
     this.globals.spinner.show();
-    await this.customersService.getCustomersByOrganisation();
+    await this.initCustomer();
     this.globals.spinner.hide();
   }
 
@@ -44,7 +44,7 @@ export class CustomersComponent {
       const resp: any = await this.customersService.deleteCustomer(userId);
       this.globals.spinner.hide();
       this.globals.toast.success(resp.message);
-      await this.customersService.getCustomersByOrganisation();
+      await this.initCustomer();
     }
   }
 
@@ -53,7 +53,7 @@ export class CustomersComponent {
     this.customersService.customer?._id
       ? await this.customersService.updateCustomer(customer)
       : await this.customersService.postCustomer(customer);
-    await this.customersService.getCustomersByOrganisation();
+    await this.initCustomer();
     this.globals.spinner.hide();
   }
 
@@ -75,14 +75,32 @@ export class CustomersComponent {
     this.customersService.customersPagination.search = event.target.value;
     setTimeout(async () => {
       this.globals.spinner.show();
-      await this.customersService.getCustomersByOrganisation();
+      await this.initCustomer();
       this.globals.spinner.hide();
     }, 1500);
   }
 
   async onPageChange(page: any) {
     this.customersService.customersPagination.page = page;
-    await this.customersService.getCustomersByOrganisation();
+    await this.initCustomer();
+  }
+
+  async onItemsPerPageChange(itemsPerPage: any) {
+    this.customersService.customersPagination.itemsPerPage = itemsPerPage;
+    await this.initCustomer();
+  }
+
+  async initCustomer() {
+    switch (this.globals.user.role) {
+      case 'super_admin':
+        await this.customersService.getCustomers();
+        break;
+      case 'user':
+        await this.customersService.getCustomersByOrganisation();
+        break;
+      default:
+        break;
+    }
   }
 
   resetData() {

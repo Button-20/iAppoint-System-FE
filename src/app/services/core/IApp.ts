@@ -69,8 +69,20 @@ export interface ISubscription {
   durationType: string;
 }
 
-export interface IResetPassword{
+export interface IResetPassword {
   email: string;
   password: string;
   token: string;
+}
+
+export interface ITicket {
+  _id: string;
+  title: string;
+  description: string;
+  customer: ICustomer;
+  user: IUser;
+  organisation: IOrganisation;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
 }

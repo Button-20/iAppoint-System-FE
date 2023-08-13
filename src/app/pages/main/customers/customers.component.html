@@ -102,6 +102,9 @@
   </div>
   <div class="mx-3 mt-2">
     <pagination
+      (itemsPerPageChanged)="onItemsPerPageChange($event)"
+      (pageChanged)="onPageChange($event)"
+      [currentPage]="customersService.customersPagination.page"
       [totalItems]="customersService.customers.length"
       [itemsPerPage]="customersService.customersPagination.itemsPerPage"
     ></pagination>

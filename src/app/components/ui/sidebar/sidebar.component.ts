@@ -45,6 +45,11 @@ export class SidebarComponent {
       icon: 'bi-cash-stack',
       link: '/main/payments',
     },
+    {
+      name: 'Tickets',
+      icon: 'bi-file-earmark-text-fill',
+      link: '/main/tickets',
+    },
   ];
 
   constructor(private globals: GlobalsService) {}

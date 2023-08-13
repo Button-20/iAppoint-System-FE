@@ -19,8 +19,19 @@ export class UsersComponent {
   ) {}
 
   async ngOnInit() {
-    await this.usersService.getUsers();
-    await this.organisationsService.getOrganisations();
+    await this.initializeUser();
+  }
+
+  ngOnDestroy() {
+    this.usersService.users = [];
+    this.usersService.usersPagination = {
+      page: 1,
+      itemsPerPage: 10,
+      totalItemsCount: 0,
+      search: '',
+      sortBy: 'createdAt',
+      order: 'DESC',
+    };
   }
 
   ngAfterViewInit() {
@@ -30,7 +41,7 @@ export class UsersComponent {
   async onDelete(userId: string) {
     if (confirm('Are you sure you want to delete this user?')) {
       await this.usersService.deleteUser(userId);
-      await this.usersService.getUsers();
+      await this.initializeUser();
     }
   }
 
@@ -39,7 +50,7 @@ export class UsersComponent {
     this.usersService.user?._id
       ? await this.usersService.updateUser(user)
       : await this.usersService.postUser(user);
-    await this.usersService.getUsers();
+    await this.initializeUser();
     this.globals.spinner.hide();
   }
 
@@ -59,16 +70,26 @@ export class UsersComponent {
 
   async onPageChange(page: any) {
     this.usersService.usersPagination.page = page;
-    await this.usersService.getUsers();
+    await this.initializeUser();
+  }
+
+  async itemsPerPageChanged(event: any) {
+    this.usersService.usersPagination.itemsPerPage = event;
+    await this.initializeUser();
   }
 
   async search(event: any) {
     this.usersService.usersPagination.search = event.target.value;
     setTimeout(async () => {
       this.globals.spinner.show();
-      await this.usersService.getUsers();
+      await this.initializeUser();
       this.globals.spinner.hide();
     }, 1500);
+  }
+
+  async initializeUser() {
+    await this.usersService.getUsers();
+    await this.organisationsService.getOrganisations();
   }
 
   resetData() {

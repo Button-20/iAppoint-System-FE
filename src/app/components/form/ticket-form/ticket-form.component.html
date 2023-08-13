@@ -1,0 +1,160 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ ticket ? "Edit" : "Add" }}
+    Ticket
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="ticketForm.reset(); ticket = null; dismissModal.emit()"
+    #closeBtn
+  ></button>
+</div>
+<div class="modal-body">
+  <form class="mx-4" [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <div class="form-input mb-2">
+      <input
+        type="text"
+        id="title"
+        aria-describedby="titleHelp"
+        autocomplete="off"
+        formControlName="title"
+        placeholder="Title"
+        required
+        [ngClass]="{
+          'is-invalid': title.invalid && (title.dirty || title.touched),
+          'is-valid': title.valid && (title.dirty || title.touched)
+        }"
+      />
+      <label for="title" class="form-label"
+        >Title <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="title.invalid && (title.dirty || title.touched)"
+    >
+      <small
+        *ngIf="
+        title.invalid && (title.dirty || title.touched) && title.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Title is required
+      </small>
+      <small
+        *ngIf="
+        title.invalid && (title.dirty || title.touched) && title.errors?.['minlength']
+      "
+        class="text-danger"
+      >
+        Title must be at least 3 characters long.
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4 dropdown" (click)="selectDropdown($event)">
+      <input
+        type="text"
+        id="customer"
+        aria-describedby="customerHelp"
+        autocomplete="off"
+        [value]="
+          selectedCustomer
+            ? selectedCustomer.firstname + ' ' + selectedCustomer.lastname
+            : ''
+        "
+        placeholder="Customer"
+        required
+        readonly
+        [ngClass]="{
+          'is-invalid':
+            customer.invalid && (customer.dirty || customer.touched),
+          'is-valid': customer.valid && (customer.dirty || customer.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Customer <span class="text-danger">*</span></label
+      >
+      <div class="dropdown-options">
+        <div
+          class="dropdown-option"
+          *ngFor="let customer of customers"
+          (click)="
+            ticketForm.controls['customer'].setValue(customer._id);
+            selectedCustomer = customer
+          "
+        >
+          {{ customer.firstname }} {{ customer.lastname }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="customer.invalid && (customer.dirty || customer.touched)"
+    >
+      <small
+        *ngIf="
+        customer.invalid && (customer.dirty || customer.touched) && customer.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Customer is required
+      </small>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <textarea
+        id="description"
+        aria-describedby="descriptionHelp"
+        autocomplete="off"
+        formControlName="description"
+        rows="5"
+        placeholder="Description"
+        class="form-control"
+        required
+        [ngClass]="{
+          'is-invalid':
+            description.invalid && (description.dirty || description.touched),
+          'is-valid':
+            description.valid && (description.dirty || description.touched)
+        }"
+      ></textarea>
+      <label for="Description" class="form-label"
+        >Description <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="description.invalid && (description.dirty || description.touched)"
+    >
+      <small
+        *ngIf="
+        description.invalid && (description.dirty || description.touched) && description.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Description is required
+      </small>
+    </div>
+
+    <div class="modal-footer mt-3 border-0 p-0">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        (click)="ticketForm.reset(); dismissModal.emit()"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary me-0"
+        [disabled]="!ticketForm.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

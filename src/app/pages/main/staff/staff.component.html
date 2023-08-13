@@ -77,7 +77,12 @@
           </td>
           <td>
             <div class="d-flex align-items-center gap-2">
-              <button class="actionBtn text-primary">
+              <button
+                class="actionBtn text-primary"
+                (click)="usersService.staff = user"
+                data-bs-toggle="modal"
+                attr.data-bs-target="{{ '#' + modalId }}"
+              >
                 <i class="bi bi-pencil-square"></i>
               </button>
               <button
@@ -105,8 +110,11 @@
   </div>
   <div class="mx-3 mt-2">
     <pagination
+      (pageChanged)="onPageChange($event)"
+      (itemsPerPageChanged)="itemsPerPageChanged($event)"
       [totalItems]="usersService.staffs.length"
-      [itemsPerPage]="5"
+      [currentPage]="usersService.staffPagination.page"
+      [itemsPerPage]="usersService.staffPagination.itemsPerPage"
     ></pagination>
   </div>
 </div>

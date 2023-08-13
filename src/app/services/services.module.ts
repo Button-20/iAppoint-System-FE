@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppointmentsService } from './api/appointments/appointments.service';
+import { CustomersService } from './api/customers/customers.service';
+import { OrganisationsService } from './api/organisations/organisations.service';
+import { PaymentsService } from './api/payments/payments.service';
+import { SmsService } from './api/sms/sms.service';
+import { TicketsService } from './api/tickets/tickets.service';
 import { UsersService } from './api/users/users.service';
 import { GlobalsService } from './core/globals';
 import { RequestService } from './core/request';
-import { CustomersService } from './api/customers/customers.service';
-import { OrganisationsService } from './api/organisations/organisations.service';
-import { SmsService } from './api/sms/sms.service';
 
 const components: Array<any> = [
   UsersService,
@@ -16,7 +18,9 @@ const components: Array<any> = [
   AppointmentsService,
   CustomersService,
   OrganisationsService,
-  SmsService
+  SmsService,
+  TicketsService,
+  PaymentsService,
 ];
 
 @NgModule({

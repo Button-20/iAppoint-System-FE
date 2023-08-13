@@ -10,6 +10,7 @@ import { PaymentFormComponent } from './form/payment-form/payment-form.component
 import { ResetPasswordFormComponent } from './form/reset-password-form/reset-password-form.component';
 import { SigninFormComponent } from './form/signin-form/signin-form.component';
 import { StaffFormComponent } from './form/staff-form/staff-form.component';
+import { TicketFormComponent } from './form/ticket-form/ticket-form.component';
 import { UserFormComponent } from './form/user-form/user-form.component';
 import { ModalComponent } from './ui/modal/modal.component';
 import { NavbarComponent } from './ui/navbar/navbar.component';
@@ -30,6 +31,7 @@ const components: Array<any> = [
   PaymentFormComponent,
   ForgotPasswordFormComponent,
   ResetPasswordFormComponent,
+  TicketFormComponent,
 ];
 
 @NgModule({

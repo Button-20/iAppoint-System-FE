@@ -54,7 +54,7 @@
               <ul class="dropdown-menu dropend">
                 <li>
                   <a
-                    class="dropdown-item"
+                    class="dropdown-item pointer"
                     data-bs-toggle="modal"
                     attr.data-bs-target="{{ '#' + modalId }}"
                     (click)="appointmentsService.appointment = appointment"
@@ -64,7 +64,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" (click)="onDelete(appointment._id)">
+                  <a class="dropdown-item pointer" (click)="onDelete(appointment._id)">
                     <i class="bi bi-trash me-2"></i>
                     Delete</a
                   >
@@ -96,6 +96,9 @@
   </div>
   <div class="mx-3 mt-2">
     <pagination
+      (pageChanged)="onPageChange($event)"
+      (itemsPerPageChanged)="onItemsPerPageChanged($event)"
+      [currentPage]="appointmentsService.appointmentsPagination.page"
       [totalItems]="appointmentsService.appointments.length"
       [itemsPerPage]="appointmentsService.appointmentsPagination.itemsPerPage"
     ></pagination>

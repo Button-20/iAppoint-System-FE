@@ -61,6 +61,7 @@ export class StaffFormComponent {
       this.staffForm.patchValue({
         ...this.staff,
       });
+      this.staffForm.controls['password'].disable();
     }
   }
 
@@ -124,5 +125,4 @@ export class StaffFormComponent {
   get phone_alt() {
     return this.staffForm.get('phone_alt') as FormControl;
   }
-
 }

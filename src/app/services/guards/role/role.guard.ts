@@ -22,14 +22,10 @@ export class RoleGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    if (this.globals.storage.isAuthenticated()) {
+    if (this.globals.user.role == 'super_admin') {
       return true;
     }
-
-    this.globals.router.navigate(['auth'], {
-      queryParams: { redirectUrl: state.url },
-    });
-    this.globals.storage.clearAllStorage();
+    alert('You are not authorized to access this page!');
     return false;
   }
 }

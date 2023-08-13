@@ -8,10 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ForgotPasswordFormComponent {
   forgotPasswordForm: FormGroup = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   @Output() onSubmitEvent: EventEmitter<any> = new EventEmitter<any>();

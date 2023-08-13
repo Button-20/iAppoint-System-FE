@@ -38,10 +38,7 @@ export class StaffFormComponent {
     ),
     email: new FormControl(
       '',
-      Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ])
+      Validators.compose([Validators.required, Validators.email])
     ),
     phone: new FormControl(
       '',

@@ -52,7 +52,10 @@ export class SidebarComponent {
     },
   ];
 
-  constructor(private globals: GlobalsService) {}
+  constructor(private globals: GlobalsService) {
+    if (globals.user.role == 'user')
+      this.navigations = this.navigations.filter((nav) => nav.name != 'Staff');
+  }
 
   logout() {
     this.globals.logOutUser();

@@ -57,6 +57,7 @@ export class TicketFormComponent {
     if (this.ticketForm.valid) {
       this.emitSubmit.emit(this.ticketForm.value);
       this.ticketForm.reset();
+      this.selectedCustomer = undefined;
       this.closeBtn.nativeElement?.click();
     }
   }

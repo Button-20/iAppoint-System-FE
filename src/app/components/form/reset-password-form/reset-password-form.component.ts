@@ -13,10 +13,7 @@ export class ResetPasswordFormComponent {
   resetPasswordForm: FormGroup = new FormGroup(
     {
       token: new FormControl('', [Validators.required]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.pattern(
@@ -30,8 +27,8 @@ export class ResetPasswordFormComponent {
 
   @Output() onSubmitEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
-  
+  constructor() {}
+
   ngOnChanges() {
     this.resetPasswordForm.patchValue({ token: this.token });
   }

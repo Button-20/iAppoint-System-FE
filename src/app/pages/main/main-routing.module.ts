@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoleGuard } from 'src/app/services/guards/role/role.guard';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { BulkSmsComponent } from './bulk-sms/bulk-sms.component';
 import { CustomersComponent } from './customers/customers.component';
@@ -7,8 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { StaffComponent } from './staff/staff.component';
-import { UsersComponent } from './users/users.component';
 import { TicketsComponent } from './tickets/tickets.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
         path: 'users',
         component: UsersComponent,
         data: { title: 'Users' },
+        canActivate: [RoleGuard],
       },
       {
         path: 'staff',

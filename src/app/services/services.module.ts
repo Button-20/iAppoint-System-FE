@@ -6,6 +6,7 @@ import { CustomersService } from './api/customers/customers.service';
 import { OrganisationsService } from './api/organisations/organisations.service';
 import { PaymentsService } from './api/payments/payments.service';
 import { SmsService } from './api/sms/sms.service';
+import { SubscriptionsService } from './api/subscriptions/subscriptions.service';
 import { TicketsService } from './api/tickets/tickets.service';
 import { UsersService } from './api/users/users.service';
 import { GlobalsService } from './core/globals';
@@ -21,6 +22,7 @@ const components: Array<any> = [
   SmsService,
   TicketsService,
   PaymentsService,
+  SubscriptionsService,
 ];
 
 @NgModule({

@@ -1,1 +1,226 @@
-<p>payment-form works!</p>
+<div class="modal-header">
+  <h5 class="modal-title">Make Payment</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="paymentForm.reset({ mobile_network: 'MTN' }); dismissModal.emit()"
+    #closeBtn
+  ></button>
+</div>
+<div class="modal-body">
+  <form class="mx-4" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="row g-0 gx-3 my-3">
+      <div class="col-6">
+        <div class="form-input mb-2">
+          <input
+            type="number"
+            id="amount"
+            aria-describedby="amountHelp"
+            autocomplete="off"
+            formControlName="amount"
+            placeholder="Amount"
+            required
+            [ngClass]="{
+              'is-invalid': amount.invalid && (amount.dirty || amount.touched),
+              'is-valid': amount.valid && (amount.dirty || amount.touched)
+            }"
+          />
+          <label for="amount" class="form-label"
+            >Amount <span class="text-danger">*</span></label
+          >
+        </div>
+        <div
+          class="validation-messages"
+          *ngIf="amount.invalid && (amount.dirty || amount.touched)"
+        >
+          <small
+            *ngIf="
+        amount.invalid && (amount.dirty || amount.touched) && amount.errors?.['required']
+      "
+            class="text-danger"
+          >
+            Amount is required
+          </small>
+          <small
+            *ngIf="
+        amount.invalid && (amount.dirty || amount.touched) && amount.errors?.['minlength']
+      "
+            class="text-danger"
+          >
+            Amount must be at least 3 characters long
+          </small>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-input mb-2 dropdown" (click)="selectDropdown($event)">
+          <input
+            type="text"
+            id="subscription"
+            aria-describedby="subscriptionHelp"
+            autocomplete="off"
+            [value]="selectedSubscription ? selectedSubscription.name : ''"
+            placeholder="Subscription"
+            required
+            readonly
+            [ngClass]="{
+              'is-invalid':
+                subscription.invalid &&
+                (subscription.dirty || subscription.touched),
+              'is-valid':
+                subscription.valid &&
+                (subscription.dirty || subscription.touched)
+            }"
+          />
+          <label for="email" class="form-label"
+            >Subscription <span class="text-danger">*</span></label
+          >
+          <div class="dropdown-options">
+            <div
+              class="dropdown-option"
+              *ngFor="let subscription of subscriptions"
+              (click)="
+                paymentForm.controls['subscription'].setValue(subscription._id);
+                selectedSubscription = subscription
+              "
+            >
+              {{ subscription.name }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="validation-messages"
+          *ngIf="
+            subscription.invalid && (subscription.dirty || subscription.touched)
+          "
+        >
+          <small
+            *ngIf="
+        subscription.invalid && (subscription.dirty || subscription.touched) && subscription.errors?.['required']
+      "
+            class="text-danger"
+          >
+            Subscription is required
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-input my-3 mb-4">
+      <input
+        type="tel"
+        id="mobile_number"
+        aria-describedby="phoneHelp"
+        autocomplete="off"
+        formControlName="phone"
+        placeholder="Mobile Number"
+        required
+        [ngClass]="{
+          'is-invalid':
+            mobile_number.invalid &&
+            (mobile_number.dirty || mobile_number.touched),
+          'is-valid':
+            mobile_number.valid &&
+            (mobile_number.dirty || mobile_number.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Mobile Number <span class="text-danger">*</span>
+      </label>
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="
+        mobile_number.invalid && (mobile_number.dirty || mobile_number.touched)
+      "
+    >
+      <small
+        *ngIf="
+        mobile_number.invalid && (mobile_number.dirty || mobile_number.touched) && mobile_number.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Mobile Number is required
+      </small>
+      <small
+        *ngIf="
+        mobile_number.invalid && (mobile_number.dirty || mobile_number.touched) && mobile_number.errors?.['minlength']
+      "
+        class="text-danger"
+      >
+        Mobile Number must be at least 10 characters long
+      </small>
+    </div>
+
+    <div class="my-3 mb-4">
+      <p class="mb-2">Mobile Network</p>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          formControlName="mobile_network"
+          name="mobile_network"
+          id="MTN"
+          value="MTN"
+        />
+        <label class="form-check-label" for="MTN">MTN</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="mobile_network"
+          formControlName="mobile_network"
+          id="VODAFONE"
+          value="VODAFONE"
+        />
+        <label class="form-check-label" for="VODAFONE">VODAFONE</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="mobile_network"
+          formControlName="mobile_network"
+          id="AIRTEL"
+          value="AIRTEL"
+        />
+        <label class="form-check-label" for="AIRTEL">AIRTEL</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="mobile_network"
+          formControlName="mobile_network"
+          id="TIGO"
+          value="TIGO"
+        />
+        <label class="form-check-label" for="TIGO">TIGO</label>
+      </div>
+    </div>
+
+    <div class="modal-footer mt-3 border-0 p-0">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        (click)="
+          paymentForm.reset({ mobile_network: 'MTN' });
+          dismissModal.emit();
+          selectedSubscription = null
+        "
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary me-0"
+        [disabled]="!paymentForm.valid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

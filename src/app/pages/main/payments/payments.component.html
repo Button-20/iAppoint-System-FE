@@ -101,5 +101,8 @@
   [keyboard]="false"
   [backdrop]="'static'"
 >
-  <payment-form (emitSubmit)="onSubmit($event)"></payment-form>
+  <payment-form
+    (emitSubmit)="onSubmit($event)"
+    [subscriptions]="subscriptionsService.subscriptions"
+  ></payment-form>
 </modal>

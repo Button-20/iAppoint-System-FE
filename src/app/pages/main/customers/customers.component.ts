@@ -81,13 +81,17 @@ export class CustomersComponent {
   }
 
   async onPageChange(page: any) {
+    this.globals.spinner.show();
     this.customersService.customersPagination.page = page;
     await this.initCustomer();
+    this.globals.spinner.hide();
   }
 
   async onItemsPerPageChange(itemsPerPage: any) {
+    this.globals.spinner.show();
     this.customersService.customersPagination.itemsPerPage = itemsPerPage;
     await this.initCustomer();
+    this.globals.spinner.hide();
   }
 
   async initCustomer() {

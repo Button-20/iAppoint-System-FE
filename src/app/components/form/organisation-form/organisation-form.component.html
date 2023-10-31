@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    {{ organisation ? "Edit" : "Add" }}
+    Organisation
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="organisationForm.reset(); organisation = null; dismissModal.emit()"
+    #closeBtn
+  ></button>
+</div>
+<div class="modal-body">
+  <form class="mx-4" [formGroup]="organisationForm" (ngSubmit)="onSubmit()">
+    <div class="form-input my-3 mb-4">
+      <input
+        type="text"
+        id="name"
+        aria-describedby="emailHelp"
+        autocomplete="off"
+        formControlName="name"
+        placeholder="Name"
+        required
+        [ngClass]="{
+          'is-invalid': name.invalid && (name.dirty || name.touched),
+          'is-valid': name.valid && (name.dirty || name.touched)
+        }"
+      />
+      <label for="email" class="form-label"
+        >Name <span class="text-danger">*</span></label
+      >
+    </div>
+    <div
+      class="validation-messages"
+      *ngIf="name.invalid && (name.dirty || name.touched)"
+    >
+      <small
+        *ngIf="
+        name.invalid && (name.dirty || name.touched) && name.errors?.['required']
+      "
+        class="text-danger"
+      >
+        Name is required
+      </small>
+    </div>
+
+    <div class="modal-footer mt-3 border-0 p-0">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+        (click)="organisationForm.reset(); dismissModal.emit()"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary me-0"
+        [disabled]="!organisationForm.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

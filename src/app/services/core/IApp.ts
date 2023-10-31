@@ -15,6 +15,9 @@ export interface IUser {
 export interface IOrganisation {
   _id: string;
   name: string;
+  picture: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Auth {

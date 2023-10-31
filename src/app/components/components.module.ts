@@ -16,6 +16,7 @@ import { ModalComponent } from './ui/modal/modal.component';
 import { NavbarComponent } from './ui/navbar/navbar.component';
 import { PaginationComponent } from './ui/pagination/pagination.component';
 import { SidebarComponent } from './ui/sidebar/sidebar.component';
+import { OrganisationFormComponent } from './form/organisation-form/organisation-form.component';
 
 const components: Array<any> = [
   SigninFormComponent,
@@ -31,7 +32,7 @@ const components: Array<any> = [
   PaymentFormComponent,
   ForgotPasswordFormComponent,
   ResetPasswordFormComponent,
-  TicketFormComponent,
+  TicketFormComponent,OrganisationFormComponent
 ];
 
 @NgModule({

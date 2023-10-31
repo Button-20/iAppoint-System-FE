@@ -1,0 +1,102 @@
+<div class="container mt-5">
+  <div class="row g-0 mx-3 mb-5 gy-2">
+    <div class="col-12 col-md-4">
+      <div class="searchbar">
+        <input
+          type="text"
+          name=""
+          placeholder="Search by Name"
+          (keyup)="search($event)"
+        />
+        <i class="bi bi-search"></i>
+      </div>
+    </div>
+    <div class="col text-end">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + modalId }}"
+      >
+        <i class="bi bi-plus-circle me-2"></i>
+        Add Organisation
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive mx-3">
+    <table class="table table-borderless align-middle">
+      <thead id="table-header">
+        <tr>
+          <th class="fw-500 bg-none">ID</th>
+          <th class="fw-500 bg-none">Name</th>
+          <th class="fw-500 bg-none">Joined</th>
+          <th class="fw-500 bg-none">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let org of organisationsService.organisations">
+          <td scope="row">
+            {{ "#" + org._id.slice(-8) }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <img
+                loading="lazy"
+                [src]="org.picture"
+                alt="User Avatar"
+                class="img-fluid avatar rounded-circle d-none d-md-block"
+              />
+              <p class="mb-0 fw-500">
+                {{ org.name }}
+              </p>
+            </div>
+          </td>
+
+          <td>
+            {{ org.createdAt | date : "mediumDate" }}
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <button
+                class="actionBtn text-primary"
+                (click)="organisationsService.organisation = org"
+                data-bs-toggle="modal"
+                attr.data-bs-target="{{ '#' + modalId }}"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="actionBtn text-danger" (click)="onDelete(org._id)">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="organisationsService.organisations.length === 0">
+          <td colspan="6" class="text-center">
+            <img
+              width="150"
+              height="150"
+              src="https://img.icons8.com/external-flat-andi-nur-abdillah/64/external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah.png"
+              alt="external-No-Content-empty-state-(flat)-flat-andi-nur-abdillah"
+            />
+            <p class="mb-0 fw-500 fs-24 text-muted">No organisations Found</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<modal
+  [modalId]="modalId"
+  [centered]="true"
+  size="xl"
+  [keyboard]="false"
+  [backdrop]="'static'"
+>
+  <organisation-form
+    (emitSubmit)="onSubmit($event)"
+    [organisation]="organisationsService.organisation"
+    (dismissModal)="resetData()"
+  ></organisation-form>
+</modal>

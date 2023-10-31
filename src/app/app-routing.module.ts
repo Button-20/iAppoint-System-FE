@@ -18,12 +18,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),
     canActivate: [AuthGuard],
-    
   },
   {
     path: '**',
     redirectTo: 'main/home',
-  }
+  },
 ];
 
 @NgModule({

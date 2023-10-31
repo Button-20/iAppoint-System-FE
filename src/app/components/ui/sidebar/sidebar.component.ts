@@ -50,11 +50,18 @@ export class SidebarComponent {
       icon: 'bi-file-earmark-text-fill',
       link: '/main/tickets',
     },
+    {
+      name: 'Organisations',
+      icon: 'bi-building',
+      link: '/main/organisations',
+    },
   ];
 
   constructor(private globals: GlobalsService) {
     if (globals.user.role == 'user')
-      this.navigations = this.navigations.filter((nav) => nav.name != 'Staff');
+      this.navigations = this.navigations.filter(
+        (nav) => nav.name != 'Staff' && nav.name != 'Organisations'
+      );
   }
 
   logout() {

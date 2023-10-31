@@ -9,6 +9,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { HomeComponent } from './home/home.component';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
+import { OrganisationsComponent } from './organisations/organisations.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { StaffComponent } from './staff/staff.component';
 import { TicketsComponent } from './tickets/tickets.component';
@@ -25,6 +26,7 @@ import { UsersComponent } from './users/users.component';
     BulkSmsComponent,
     PaymentsComponent,
     TicketsComponent,
+    OrganisationsComponent,
   ],
   imports: [
     CommonModule,

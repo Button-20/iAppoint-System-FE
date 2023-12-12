@@ -51,7 +51,8 @@ export class CustomersComponent {
   async onSubmit(customer: ICustomer) {
     this.globals.spinner.show();
     this.customersService.customer?._id
-      ? await this.customersService.updateCustomer(customer)
+      ? ((customer._id = this.customersService.customer?._id),
+        await this.customersService.updateCustomer(customer))
       : await this.customersService.postCustomer(customer);
     await this.initCustomer();
     this.globals.spinner.hide();

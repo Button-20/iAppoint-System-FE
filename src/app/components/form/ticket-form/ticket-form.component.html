@@ -139,6 +139,31 @@
       </small>
     </div>
 
+    <div class="form-input my-3 mb-4 dropdown" (click)="selectDropdown($event)">
+      <input
+        type="text"
+        id="customer"
+        aria-describedby="customerHelp"
+        autocomplete="off"
+        [value]="ticketForm.controls['status'].value | titlecase"
+        placeholder="Customer"
+        required
+        readonly
+      />
+      <label for="email" class="form-label"
+        >Status <span class="text-danger">*</span></label
+      >
+      <div class="dropdown-options">
+        <div
+          class="dropdown-option"
+          *ngFor="let status of statusOptions"
+          (click)="ticketForm.controls['status'].setValue(status)"
+        >
+          {{ status  | titlecase }}
+        </div>
+      </div>
+    </div>
+
     <div class="modal-footer mt-3 border-0 p-0">
       <button
         type="button"

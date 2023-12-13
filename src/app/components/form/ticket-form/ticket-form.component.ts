@@ -37,7 +37,10 @@ export class TicketFormComponent {
       Validators.compose([Validators.required, Validators.minLength(3)])
     ),
     customer: new FormControl('', Validators.required),
+    status: new FormControl('pending'),
   });
+
+  statusOptions: string[] = ['pending', 'resolved'];
 
   selectedCustomer: ICustomer | undefined;
 

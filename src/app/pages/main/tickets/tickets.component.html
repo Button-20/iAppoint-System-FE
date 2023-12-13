@@ -16,7 +16,7 @@
     <table class="table table-borderless align-middle">
       <thead id="table-header">
         <tr>
-          <th class="fw-500 bg-none">ID</th>
+          <th class="fw-500 bg-none">Date</th>
           <th class="fw-500 bg-none">Title</th>
           <th class="fw-500 bg-none">Customer</th>
           <th class="fw-500 bg-none">Description</th>
@@ -27,7 +27,7 @@
       <tbody class="table-group-divider">
         <tr *ngFor="let ticket of ticketsService.tickets">
           <td scope="row">
-            {{ "#" + ticket._id.slice(-8) }}
+            {{ ticket.createdAt | date: 'dd/MM/yyyy' }}
           </td>
           <td>
             <p class="mb-0 fw-500">

@@ -41,8 +41,8 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center">
             <h4 class="card-title text-white">
-              {{ appointment.customer.firstname }}
-              {{ appointment.customer.lastname }}
+              {{ appointment.customer && appointment.customer.firstname }}
+              {{ appointment.customer && appointment.customer.lastname }}
             </h4>
             <div class="dropdown">
               <i

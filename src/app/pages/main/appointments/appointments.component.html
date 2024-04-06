@@ -99,7 +99,7 @@
       (pageChanged)="onPageChange($event)"
       (itemsPerPageChanged)="onItemsPerPageChanged($event)"
       [currentPage]="appointmentsService.appointmentsPagination.page"
-      [totalItems]="appointmentsService.appointments.length"
+      [totalItems]="appointmentsService.appointmentsPagination.totalItemsCount"
       [itemsPerPage]="appointmentsService.appointmentsPagination.itemsPerPage"
     ></pagination>
   </div>

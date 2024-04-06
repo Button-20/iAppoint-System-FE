@@ -100,7 +100,7 @@
       (pageChanged)="onPageChange($event)"
       (itemsPerPageChanged)="itemsPerPageChanged($event)"
       [currentPage]="ticketsService.ticketsPagination.page"
-      [totalItems]="ticketsService.tickets.length"
+      [totalItems]="ticketsService.ticketsPagination.totalItemsCount"
       [itemsPerPage]="ticketsService.ticketsPagination.itemsPerPage"
     ></pagination>
   </div>

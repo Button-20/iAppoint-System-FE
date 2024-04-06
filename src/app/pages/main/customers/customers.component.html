@@ -105,7 +105,7 @@
       (itemsPerPageChanged)="onItemsPerPageChange($event)"
       (pageChanged)="onPageChange($event)"
       [currentPage]="customersService.customersPagination.page"
-      [totalItems]="customersService.customers.length"
+      [totalItems]="customersService.customersPagination.totalItemsCount"
       [itemsPerPage]="customersService.customersPagination.itemsPerPage"
     ></pagination>
   </div>

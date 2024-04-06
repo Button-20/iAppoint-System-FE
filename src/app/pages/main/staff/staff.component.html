@@ -112,7 +112,7 @@
     <pagination
       (pageChanged)="onPageChange($event)"
       (itemsPerPageChanged)="itemsPerPageChanged($event)"
-      [totalItems]="usersService.staffs.length"
+      [totalItems]="usersService.staffPagination.totalItemsCount"
       [currentPage]="usersService.staffPagination.page"
       [itemsPerPage]="usersService.staffPagination.itemsPerPage"
     ></pagination>
